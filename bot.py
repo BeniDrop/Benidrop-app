@@ -1,6 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
-from config import settings
+from config import BaseModel
 import logging
 from models import User, Badge, Task, CompletedTask
 from sqlalchemy.orm import sessionmaker
