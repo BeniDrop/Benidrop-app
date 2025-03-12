@@ -1,7 +1,7 @@
-from pydantic import BaseSettings
+from pydantic import BaseModel
 import os
 
-class Settings(BaseSettings):
+class Foo(BaseModel):
     # Bot Configuration
     BOT_TOKEN: str
     WEBAPP_URL: str = "https://t.me/BeniDropBot"
@@ -10,8 +10,8 @@ class Settings(BaseSettings):
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///benidrop.db")
     
     # Project Wallet Configuration
-    PROJECT_WALLET: str = os.getenv("PROJECT_WALLET", "")  # Your wallet address
-    WALLET_TAG: str = os.getenv("WALLET_TAG", "")  # Your wallet tag/memo if needed
+    PROJECT_WALLET: str = os.getenv("PROJECT_WALLET", "")  
+    WALLET_TAG: str = os.getenv("WALLET_TAG", "")  
     
     # Social Links
     TELEGRAM_GROUP: str = "https://t.me/benidrop"
