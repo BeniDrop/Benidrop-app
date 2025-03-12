@@ -1,6 +1,6 @@
 # BeniDrop Airdrop Bot
 
-A Telegram mini-app for BeniDrop token airdrop distribution with MultiversX wallet integration.
+A Telegram mini-app for BeniDrop token airdrop distribution for MultiversX community.
 
 ## Features
 
@@ -9,8 +9,6 @@ A Telegram mini-app for BeniDrop token airdrop distribution with MultiversX wall
 - ✅ Social task completion rewards
 - 📅 Daily check-in & streak bonus
 - 🏆 Leaderboard system
-- 💳 MultiversX wallet integration
-- 🏷️ Badge system for reward boosting
 
 
 ## Requirements
