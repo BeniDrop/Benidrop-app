@@ -17,4 +17,3 @@ A Telegram mini-app for BeniDrop token airdrop distribution for MultiversX commu
 - FastAPI
 - SQLite3
 - python-telegram-bot
-- multiversx-sdk-py
