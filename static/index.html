@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeniDrop Airdrop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/@multiversx/sdk-web-wallet@1.0.0/dist/bundle.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar fixed bottom-0 left-0 right-0 py-2">
+        <div class="flex justify-around items-center">
+            <button onclick="showPage('home')" class="nav-btn flex flex-col items-center text-gray-400">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Home</span>
+            </button>
+            <button onclick="showPage('tasks')" class="nav-btn flex flex-col items-center text-gray-400">
+                <i class="fas fa-tasks text-xl"></i>
+                <span class="text-xs mt-1">Tasks</span>
+            </button>
+            <button onclick="showPage('invite')" class="nav-btn flex flex-col items-center text-gray-400">
+                <i class="fas fa-user-plus text-xl"></i>
+                <span class="text-xs mt-1">Invite</span>
+            </button>
+            <button onclick="showPage('leaderboard')" class="nav-btn flex flex-col items-center text-gray-400">
+                <i class="fas fa-trophy text-xl"></i>
+                <span class="text-xs mt-1">Leaderboard</span>
+            </button>
+            <button onclick="showPage('wallet')" class="nav-btn flex flex-col items-center text-gray-400">
+                <i class="fas fa-wallet text-xl"></i>
+                <span class="text-xs mt-1">Wallet</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Content Pages -->
+    <div class="container mx-auto px-4 pb-20">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Profile Section -->
+            <div class="profile-card rounded-xl p-6 mt-6 mb-8">
+                <div class="flex items-center">
+                    <img id="profile-picture" src="" alt="Profile" class="profile-picture w-20 h-20 rounded-full">
+                    <div class="ml-4">
+                        <h2 id="profile-name" class="text-xl font-bold gradient-text"></h2>
+                        <p id="join-date" class="text-gray-400"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="card rounded-xl p-4">
+                    <div class="text-center">
+                        <i class="fas fa-coins text-yellow-500 text-2xl mb-2"></i>
+                        <h3 class="text-gray-400">Total Tokens</h3>
+                        <p id="total-tokens" class="text-2xl font-bold gradient-text stat-counter">0</p>
+                    </div>
+                </div>
+                <div class="card rounded-xl p-4">
+                    <div class="text-center">
+                        <i class="fas fa-fire text-orange-500 text-2xl mb-2"></i>
+                        <h3 class="text-gray-400">Streak</h3>
+                        <p id="check-in-streak" class="text-2xl font-bold gradient-text stat-counter">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Check-in -->
+            <div class="card rounded-xl p-6 mb-8">
+                <div class="text-center">
+                    <i class="fas fa-calendar-check text-4xl mb-4 text-purple-500"></i>
+                    <h3 class="text-xl font-bold mb-2">Daily Check-in</h3>
+                    <p class="text-gray-400 mb-4">Check in daily to earn tokens and maintain your streak!</p>
+                    <button id="daily-checkin" class="glow-button w-full py-3 rounded-lg font-bold text-white">
+                        Claim Daily Reward
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card rounded-xl p-6">
+                <h3 class="text-lg font-bold mb-4">Quick Stats</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Tasks Completed</span>
+                        <span id="tasks-completed" class="font-bold">0/5</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Total Referrals</span>
+                        <span id="total-referrals" class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400">Leaderboard Rank</span>
+                        <span id="leaderboard-rank" class="font-bold">#0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Page -->
+        <div id="tasks-page" class="page hidden">
+            <div class="py-8">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">🎯 Available Tasks</h2>
+                <div class="space-y-4" id="tasks-list">
+                    <!-- Task 1: Join Telegram -->
+                    <div class="task-card rounded-xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold">Join Telegram Group</h3>
+                                <p class="text-gray-400 text-sm">Join our official Telegram group</p>
+                                <p class="text-purple-400 text-sm">+1000 tokens</p>
+                            </div>
+                            <button class="glow-button px-4 py-2 rounded-lg text-white">
+                                Join Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task 2: Follow Twitter -->
+                    <div class="task-card rounded-xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold">Follow on Twitter</h3>
+                                <p class="text-gray-400 text-sm">Follow our official Twitter account</p>
+                                <p class="text-purple-400 text-sm">+1000 tokens</p>
+                            </div>
+                            <button class="glow-button px-4 py-2 rounded-lg text-white">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task 3: Retweet -->
+                    <div class="task-card rounded-xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold">Retweet Announcement</h3>
+                                <p class="text-gray-400 text-sm">Retweet our pinned post</p>
+                                <p class="text-purple-400 text-sm">+500 tokens</p>
+                            </div>
+                            <button class="glow-button px-4 py-2 rounded-lg text-white">
+                                Retweet
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task 4: Join Discord -->
+                    <div class="task-card rounded-xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold">Join Discord</h3>
+                                <p class="text-gray-400 text-sm">Join our Discord community</p>
+                                <p class="text-purple-400 text-sm">+1000 tokens</p>
+                            </div>
+                            <button class="glow-button px-4 py-2 rounded-lg text-white">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task 5: Share Meme -->
+                    <div class="task-card rounded-xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold">Share a Meme</h3>
+                                <p class="text-gray-400 text-sm">Create & share a BeniDrop meme</p>
+                                <p class="text-purple-400 text-sm">+1500 tokens</p>
+                            </div>
+                            <button class="glow-button px-4 py-2 rounded-lg text-white">
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invite Page -->
+        <div id="invite-page" class="page hidden">
+            <div class="py-8">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">🤝 Invite Friends</h2>
+                <div class="card rounded-xl p-6">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-gift text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold">Earn 5,000 tokens per referral!</h3>
+                        <p class="text-gray-400 mt-2">Share your referral link and earn when friends join</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <p class="font-mono text-sm break-all" id="referral-code"></p>
+                    </div>
+                    <button onclick="copyReferralLink()" class="glow-button w-full py-3 rounded-lg font-bold text-white">
+                        Copy Referral Link
+                    </button>
+                    
+                    <!-- Referral Stats -->
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4">Your Referral Stats</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-400">Total Referrals</span>
+                                <span id="referral-count" class="font-bold">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-400">Tokens Earned</span>
+                                <span id="referral-tokens" class="font-bold">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Page -->
+        <div id="leaderboard-page" class="page hidden">
+            <div class="py-8">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">🏆 Top Earners</h2>
+                <div class="space-y-4" id="leaderboard-list">
+                    <!-- Leaderboard items will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Page -->
+        <div id="wallet-page" class="page hidden">
+            <div class="py-8">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">💳 Wallet</h2>
+                
+                <!-- Wallet Submission -->
+                <div class="card rounded-xl p-6 mb-6">
+                    <div id="wallet-form">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-wallet text-4xl text-purple-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2">Submit Your Wallet</h3>
+                            <p class="text-gray-400 mb-4">Enter your wallet address to receive rewards</p>
+                        </div>
+                        <form id="wallet-submit-form" class="space-y-4">
+                            <div>
+                                <input type="text" id="wallet-address" 
+                                    class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white" 
+                                    placeholder="Your wallet address" required>
+                            </div>
+                            <button type="submit" class="glow-button w-full py-3 rounded-lg font-bold text-white">
+                                Save Wallet
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Donation Section -->
+                <div class="card rounded-xl p-6">
+                    <div class="text-center">
+                        <i class="fas fa-heart text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Support BeniDrop</h3>
+                        <p class="text-gray-400 mb-4">Help us grow the community!</p>
+                        <div class="bg-gray-800 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-400 mb-2">erd1rf9q55ysam2k02azp08khtsa0l36vrw80ja4s9p4quz3hlw82e5sv8sg9h</p>
+                            <p class="text-white break-all" id="project-wallet"></p>
+                        </div>
+                        <button onclick="copyWalletAddress()" class="glow-button w-full py-3 rounded-lg font-bold text-white mb-3">
+                            <i class="fas fa-copy mr-2"></i> Copy Address
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

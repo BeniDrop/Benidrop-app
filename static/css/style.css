@@ -1,0 +1,172 @@
+/* Meme-themed colors */
+:root {
+    --primary: #8B5CF6;
+    --secondary: #EC4899;
+    --accent: #F59E0B;
+    --background: #111827;
+    --card-bg: #1F2937;
+    --text: #F3F4F6;
+    --text-secondary: #9CA3AF;
+}
+
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Rubik', sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animated cards */
+.card {
+    background: var(--card-bg);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+}
+
+/* Glowing buttons */
+.glow-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.glow-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+.glow-button:hover::before {
+    transform: scale(1);
+}
+
+/* Profile card */
+.profile-card {
+    background: linear-gradient(135deg, var(--card-bg), rgba(31, 41, 55, 0.8));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-picture {
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Stats counter animation */
+.stat-counter {
+    animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Navigation bar */
+.nav-bar {
+    background: rgba(31, 41, 55, 0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn {
+    transition: all 0.3s ease;
+}
+
+.nav-btn.active {
+    color: var(--primary);
+    transform: translateY(-5px);
+}
+
+/* Task cards */
+.task-card {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent);
+}
+
+.task-card.completed {
+    border-left-color: #10B981;
+}
+
+/* Leaderboard styles */
+.leaderboard-item {
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), transparent);
+    border-left: 4px solid var(--primary);
+}
+
+.leaderboard-item:nth-child(1) {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.2), transparent);
+    border-left-color: var(--accent);
+}
+
+.leaderboard-item:nth-child(2) {
+    background: linear-gradient(90deg, rgba(156, 163, 175, 0.2), transparent);
+    border-left-color: var(--text-secondary);
+}
+
+.leaderboard-item:nth-child(3) {
+    background: linear-gradient(90deg, rgba(180, 83, 9, 0.2), transparent);
+    border-left-color: #B45309;
+}
+
+/* Page visibility */
+.page {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Wallet connect animation */
+.wallet-connect {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+    }
+}
