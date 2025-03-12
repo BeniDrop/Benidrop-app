@@ -32,4 +32,4 @@ class Foo(BaseModel):
     class Config:
         env_file = ".env"
 
-settings = Settings()
+BaseModel = BaseModel()
