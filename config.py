@@ -31,5 +31,7 @@ class Foo(BaseModel):
     
     class Config:
         env_file = ".env"
-
-BaseModel = BaseModel()
+        env_file_encoding = "utf-8" 
+config = Foo(
+    BOT_TOKEN=os.getenv("BOT_TOKEN", ""),
+)
